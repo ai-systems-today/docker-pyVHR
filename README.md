@@ -20,8 +20,8 @@ Eight well-known rPPG methods, namely  *ICA*,  *PCA*, *GREEN,CHROM*, *POS*, *SSR
 
 ![pyVHR](https://raw.githubusercontent.com/phuselab/pyVHR/master/img/frameworkVHR.png)
 
-## Installation
-### Locally (Linux only)
+## Installation locally (Linux)
+### e.g. Ubuntu18.04
 Install the dependency first:
 
 ```text
@@ -34,14 +34,59 @@ then, install the library directly into an activated virtual environment:
 ```text
 $ pip install pyvhr
 ```
-
 or download from source and install via:
 
 ```text
 $ python setup.py install
 ```
+## Installation locally (Windows)
+### Install and Update Cygwin Packages
+https://cygwin.com/install.html
 
-### Using docker
+In the options to install components, select gcc-fortran 
+
+https://gcc.gnu.org/wiki/GFortranBinaries#Windows
+### Write a distutils.cfg file in: 
+C:\<User>\Anaconda3\Lib\distutils 
+
+with the following content:
+
+[build]
+compiler=mingw64
+
+### Setup an environment: 
+#### e.g. Anaconda Python 3.8.10
+
+Run the following commands from Anaconda prompt
+```text
+conda install libpython
+```
+```text
+conda install -c msys2 m2w64-toolchain
+```
+```text
+pip install numpy
+```
+```text
+pip install pybdf
+```
+```text
+pip install cmake
+```
+```text
+python setup.py install (will take some time)
+```
+```text
+conda install -c conda-forge widgetsnbextension
+```
+```text
+conda install -c conda-forge ipywidgets
+```
+```text
+jupyter nbextension enable --py widgetsnbextension --sys-prefix
+```
+## Using docker
+
 ```text
 $ docker-compose up
 ```
@@ -51,6 +96,12 @@ To work without using notebooks or simply to access the container, run:
 $ docker exec -it <container-name(default: 'pyvhr-dev')> bash
 ```
 
+To run an already prepared image with a dataset sample (i.e. video file with heartbeat measures), <br> 
+first download the [video.rar](https://1drv.ms/u/s!AsXU8kFit0qjm8M762El6Vk4IhqpZw?e=GpDuPM) file extract at the root of your root hard drive `(i.e. C:\video)`. <br><br>
+Then pull from docker:
+```text
+docker pull aisystemstoday/pyvhr-img
+```
 ## Usage
 
 The `notebooks` folder contains three different Jupyter notebooks:
